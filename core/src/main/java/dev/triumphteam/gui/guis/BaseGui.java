@@ -41,7 +41,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -64,13 +63,14 @@ import java.util.Set;
 public abstract class BaseGui implements InventoryHolder {
 
     // The plugin instance for registering the event and for the close delay.
-    private static final Plugin plugin = JavaPlugin.getProvidingPlugin(BaseGui.class);
+    private static Plugin PLUGIN;
 
-    // Registering the listener class.
-    static {
-        Bukkit.getPluginManager().registerEvents(new GuiListener(), plugin);
+    public static void register(Plugin plugin) {
+        PLUGIN = plugin;
+        // Registering the listener class.
+        Bukkit.getPluginManager().registerEvents(new GuiListener(), PLUGIN);
         // TODO might join these two
-        Bukkit.getPluginManager().registerEvents(new InteractionModifierListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new InteractionModifierListener(), PLUGIN);
     }
 
     // Main inventory.
@@ -509,7 +509,7 @@ public abstract class BaseGui implements InventoryHolder {
      * @param runCloseAction If should or not run the close action.
      */
     public void close(@NotNull final HumanEntity player, final boolean runCloseAction) {
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        Bukkit.getScheduler().runTaskLater(PLUGIN, () -> {
             this.runCloseAction = runCloseAction;
             player.closeInventory();
             this.runCloseAction = true;

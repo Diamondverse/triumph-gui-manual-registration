@@ -28,7 +28,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,7 +40,11 @@ public final class Pdc implements NbtWrapper {
     /**
      * Plugin instance required for the {@link NamespacedKey}.
      */
-    private static final Plugin PLUGIN = JavaPlugin.getProvidingPlugin(Pdc.class);
+    private static Plugin PLUGIN;
+    
+    public static void register(Plugin plugin) {
+        PLUGIN = plugin;
+    }
 
     /**
      * Sets an String NBT tag to the an {@link ItemStack}.
