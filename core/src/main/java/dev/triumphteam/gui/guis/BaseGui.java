@@ -27,6 +27,7 @@ import dev.triumphteam.gui.components.GuiAction;
 import dev.triumphteam.gui.components.GuiType;
 import dev.triumphteam.gui.components.InteractionModifier;
 import dev.triumphteam.gui.components.exception.GuiException;
+import dev.triumphteam.gui.components.nbt.Pdc;
 import dev.triumphteam.gui.components.util.GuiFiller;
 import dev.triumphteam.gui.components.util.Legacy;
 import net.kyori.adventure.text.Component;
@@ -71,6 +72,8 @@ public abstract class BaseGui implements InventoryHolder {
         Bukkit.getPluginManager().registerEvents(new GuiListener(), PLUGIN);
         // TODO might join these two
         Bukkit.getPluginManager().registerEvents(new InteractionModifierListener(), PLUGIN);
+
+        Pdc.register(plugin);
     }
 
     // Main inventory.
