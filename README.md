@@ -1,3 +1,14 @@
+# Fork
+This fork allows usage from environments where plugin class cannot be located implicitly (like BentoBox addons).
+
+Usage:
+```java
+public void onEnable() {
+    BaseGui.register(getPlugin());
+    // do your things
+}
+```
+
 <img src="https://cdn.discordapp.com/attachments/431545763928211457/853353180271214662/mfthread.png">
 <h1 align="center">Welcome to triumph-gui 👋</h1>
 <p>
